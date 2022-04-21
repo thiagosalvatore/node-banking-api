@@ -61,3 +61,9 @@ Please organize, design, test and document your code as if it were going into pr
 All the best and happy coding,
 
 The Paysail Team
+
+
+
+### Open questions
+- It says that I should return Balances for a given account, but the account has only one balance. So I'm returning only that. Should I return the historical balances?
+- In a real world the authenticated person would be able to transfer only from his account to another account. Since we don't have authentication at this moment, I'm assuming that you can transfer from any account to any other account using the API.
