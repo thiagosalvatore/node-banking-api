@@ -63,10 +63,17 @@ All the best and happy coding,
 The Paysail Team
 
 
+### How to run
+This project uses Node + Express + Typescript. Follow the steps below in order to use it:
+- run `yarn install` inside the project folder
+- run `yarn start:dev` to run the project with live reload enabled. It will be running on port 3000.
 
-### Open questions
+
+### Assumptions and missing items
 - It says that I should return Balances for a given account, but the account has only one balance. So I'm returning only that. Should I return the historical balances?
 - In a real world the authenticated person would be able to transfer only from his account to another account. Since we don't have authentication at this moment, I'm assuming that you can transfer from any account to any other account using the API.
+- In a real world the in memory repositories would be replaced by a database
+- Given the timeframe, I didn't implement integration tests for the APIs. I added unit tests for queries and use cases and integration tests for the repositories.
 
 
 
