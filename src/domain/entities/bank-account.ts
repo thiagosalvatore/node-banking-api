@@ -10,7 +10,9 @@ export class BankAccount {
 
     transferOut(amount: number) {
         if (this.balance < amount) {
-            throw new InsufficientFundsError(`Account ${this.id} has not enough funds to complete this transfer`);
+            throw new InsufficientFundsError(
+                `Account ${this.id} has not enough funds to complete this transfer`,
+            );
         }
         this.balance -= amount;
     }
