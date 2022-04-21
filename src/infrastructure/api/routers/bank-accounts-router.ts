@@ -4,8 +4,26 @@ import { RetrieveBankAccountBalance } from '@application/queries/retrieve-bank-a
 import { TYPES } from '@shared/types';
 import { StatusCodes } from 'http-status-codes';
 import { BankAccountNotFound } from '@domain/errors/bank-account-not-found';
+import { checkSchema, validationResult } from 'express-validator';
+import { newBankAccountSchema } from './schemas/bank-account-schema';
+import { CreateBankAccount } from '@application/use-cases/create-bank-account';
 
 const router = Router();
+
+router.post('/', checkSchema(newBankAccountSchema), async (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const createBankAccount = container.get<CreateBankAccount>(TYPES.CreateBankAccount);
+    const bankAccountData = {
+        customerId: req.body.customerId,
+        depositAmount: req.body.depositAmount,
+    };
+    const bankAccount = await createBankAccount.execute(bankAccountData);
+    return res.status(StatusCodes.CREATED).json(bankAccount);
+});
 
 router.get('/:bankAccountId', async (req: Request, res: Response) => {
     const { bankAccountId } = req.params;

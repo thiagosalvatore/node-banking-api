@@ -3,6 +3,7 @@ const TYPES = {
     BankAccountRepository: Symbol.for('BankAccountRepository'),
 
     RetrieveBankAccountBalance: Symbol.for('RetrieveBankAccountBalance'),
+    CreateBankAccount: Symbol.for('CreateBankAccount'),
 };
 
 export { TYPES };
