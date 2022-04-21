@@ -67,3 +67,55 @@ The Paysail Team
 ### Open questions
 - It says that I should return Balances for a given account, but the account has only one balance. So I'm returning only that. Should I return the historical balances?
 - In a real world the authenticated person would be able to transfer only from his account to another account. Since we don't have authentication at this moment, I'm assuming that you can transfer from any account to any other account using the API.
+
+
+
+### Project Structure
+This projects follows (in parts) the [clean architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) proposed by Uncle Bob.
+The main idea is to separate what is belongs to our business from other things (API, persistence, etc). The project is structured as follows:
+- **application** - Here we store use cases and queries. Basically it is responsible for performing operations on our domain, like creating an account, fetching balance from accounts, etc.
+- **domain** - Here is where our domain is located. We have entities that models our business, we have the interfaces to our repositories, we have errors related to our domain. Note that this layer has no dependency with things other than javascript.
+- **infrastructure** - Everything that is not tied to our business is here. Our API and controllers, persistence logic, etc.
+
+### API Documentation
+
+#### Create new bank account
+
+This resource allows you to create a new bank account in our system.
+- Method: POST
+- URL: http://localhost:3000/api/bank-accounts
+- Request Payload
+```json
+{
+  "customerId": 1,
+  "depositAmount": 100
+}
+```
+- Success Response Payload (201 - Created)
+```json
+{
+  "balance": 100,
+  "customer": {
+    "id": 3,
+    "name": "Rhonda Church"
+  },
+  "id": 1
+}
+```
+
+#### Fetch bank account balance
+This resource allows you to fetch the latest balance from a bank account.
+- Method: GET
+- URL: http://localhost:3000/api/bank-accounts/{bank_account_id}
+
+- Success Response Payload (200 - OK)
+```json
+{
+  "balance": 100,
+  "customer": {
+    "id": 3,
+    "name": "Rhonda Church"
+  },
+  "id": 1
+}
+```
