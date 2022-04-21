@@ -3,12 +3,15 @@ import { BankAccountRepository } from '@domain/repositories/bank-account-reposit
 import { TYPES } from '@shared/types';
 import { CustomerRepository } from '@domain/repositories/customer-repository';
 import { TransferDTO } from '@application/dtos/transfer-dto';
+import { TransferRepository } from '@domain/repositories/transfer-repository';
+import { Transfer } from '@domain/entities/transfer';
 
 @injectable()
 export class TransferAmount {
     constructor(
         @inject(TYPES.BankAccountRepository) private bankAccountRepository: BankAccountRepository,
         @inject(TYPES.CustomerRepository) private customerRepository: CustomerRepository,
+        @inject(TYPES.TransferRepository) private transferRepository: TransferRepository,
     ) {}
 
     async execute(transferData: TransferDTO): Promise<void> {
@@ -21,8 +24,14 @@ export class TransferAmount {
 
         fromBankAccount.transferOut(transferData.amount);
         toBankAccount.transferIn(transferData.amount);
+        const transfer: Transfer = {
+            fromBankAccountId: fromBankAccount.id!!,
+            toBankAccountId: toBankAccount.id!!,
+            amount: transferData.amount,
+        };
 
         await this.bankAccountRepository.update(fromBankAccount);
         await this.bankAccountRepository.update(toBankAccount);
+        await this.transferRepository.save(transfer);
     }
 }

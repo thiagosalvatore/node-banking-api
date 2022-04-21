@@ -1,7 +1,6 @@
-import { BankAccount } from '@domain/entities/bank-account';
-
 export interface Transfer {
-    fromBankAccount: BankAccount;
-    toBankAccount: BankAccount;
+    fromBankAccountId: number;
+    toBankAccountId: number;
     amount: number;
+    id?: number;
 }
