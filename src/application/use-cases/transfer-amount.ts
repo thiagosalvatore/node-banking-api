@@ -27,6 +27,7 @@ export class TransferAmount {
         const transfer: Transfer = {
             fromBankAccountId: fromBankAccount.id!!,
             toBankAccountId: toBankAccount.id!!,
+            referenceDate: new Date(),
             amount: transferData.amount,
         };
 

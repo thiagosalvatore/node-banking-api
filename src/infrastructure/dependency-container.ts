@@ -9,6 +9,7 @@ import { CreateBankAccount } from '@application/use-cases/create-bank-account';
 import { TransferAmount } from '@application/use-cases/transfer-amount';
 import { MemoryTransferRepository } from '@repositories/memory-transfer-repository';
 import { TransferRepository } from '@domain/repositories/transfer-repository';
+import { ListTransferHistory } from '@application/queries/list-transfer-history';
 
 const container = new Container();
 container
@@ -29,4 +30,5 @@ container
     .to(RetrieveBankAccountBalance);
 container.bind<CreateBankAccount>(TYPES.CreateBankAccount).to(CreateBankAccount);
 container.bind<TransferAmount>(TYPES.TransferAmount).to(TransferAmount);
+container.bind<ListTransferHistory>(TYPES.ListTransferHistory).to(ListTransferHistory);
 export { container };

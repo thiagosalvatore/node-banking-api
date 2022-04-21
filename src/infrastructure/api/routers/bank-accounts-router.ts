@@ -7,6 +7,7 @@ import { BankAccountNotFound } from '@domain/errors/bank-account-not-found';
 import { checkSchema, validationResult } from 'express-validator';
 import { newBankAccountSchema } from './schemas/bank-account-schema';
 import { CreateBankAccount } from '@application/use-cases/create-bank-account';
+import { ListTransferHistory } from '@application/queries/list-transfer-history';
 
 const router = Router();
 
@@ -48,6 +49,20 @@ router.get('/:bankAccountId', async (req: Request, res: Response) => {
             .status(StatusCodes.INTERNAL_SERVER_ERROR)
             .json({ message: 'Something went wrong' });
     }
+});
+
+router.get('/:bankAccountId/transfers', async (req: Request, res: Response) => {
+    const { bankAccountId } = req.params;
+
+    if (!parseInt(bankAccountId)) {
+        return res
+            .status(StatusCodes.BAD_REQUEST)
+            .json({ message: 'Bank account id needs to be an integer' });
+    }
+
+    const listTransferHistory = container.get<ListTransferHistory>(TYPES.ListTransferHistory);
+    const transfers = await listTransferHistory.execute(parseInt(bankAccountId));
+    return res.status(StatusCodes.OK).json(transfers);
 });
 
 export default router;
