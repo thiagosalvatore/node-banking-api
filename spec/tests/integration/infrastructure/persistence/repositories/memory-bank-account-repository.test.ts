@@ -11,7 +11,7 @@ describe('Infrastructure | Persistence | Repositories | MemoryBankAccountReposit
                 const repository = new MemoryBankAccountRepository([bankAccountFixture]);
                 const expectedBankAccount = bankAccountFixture;
 
-                const bankAccount = await repository.getById(bankAccountFixture.id);
+                const bankAccount = await repository.getById(bankAccountFixture.id!!);
 
                 expect(bankAccount).toEqual(expectedBankAccount);
             });
@@ -67,6 +67,17 @@ describe('Infrastructure | Persistence | Repositories | MemoryBankAccountReposit
 
             expect(repository.bankAccounts).toEqual(expectedBankAccounts);
         });
+
+        it('returns the newly created bank account with id equals 2', async () => {
+            const repository = new MemoryBankAccountRepository([
+                new BankAccount(100, customerFixture, 1),
+            ]);
+            const expectedBankAccount = new BankAccount(200, customerFixture);
+
+            const bankAccount = await repository.save(bankAccountFixture);
+
+            expect(bankAccount.id).toEqual(2);
+        });
     });
 
     describe('Test update', () => {
@@ -75,7 +86,7 @@ describe('Infrastructure | Persistence | Repositories | MemoryBankAccountReposit
                 const repository = new MemoryBankAccountRepository();
 
                 repository
-                    .update(new BankAccount(2, 100, customerFixture))
+                    .update(new BankAccount(100, customerFixture, 2))
                     .catch((e) =>
                         expect(e).toEqual(
                             new BankAccountNotFound(`Bank account with id 2 not found`),
@@ -88,9 +99,9 @@ describe('Infrastructure | Persistence | Repositories | MemoryBankAccountReposit
             it('Updates the bank account on the database', async () => {
                 const repository = new MemoryBankAccountRepository([bankAccountFixture]);
                 const updatedBankAccount = new BankAccount(
-                    bankAccountFixture.id,
                     500,
                     bankAccountFixture.customer,
+                    bankAccountFixture.id!!,
                 );
 
                 await repository.update(updatedBankAccount);

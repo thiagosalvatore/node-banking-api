@@ -9,7 +9,7 @@ describe('Application | Queries | RetrieveBankAccountBalance', () => {
             bankAccountRepositoryMock,
         );
 
-        await retrieveBankAccountBalance.execute(bankAccountFixture.id);
+        await retrieveBankAccountBalance.execute(bankAccountFixture.id!!);
 
         expect(bankAccountRepositoryMock.getById).toHaveBeenCalledWith(bankAccountFixture.id);
     });
@@ -19,7 +19,7 @@ describe('Application | Queries | RetrieveBankAccountBalance', () => {
                 bankAccountRepositoryMock,
             );
 
-            const balance = await retrieveBankAccountBalance.execute(bankAccountFixture.id);
+            const balance = await retrieveBankAccountBalance.execute(bankAccountFixture.id!!);
 
             expect(balance).toEqual(bankAccountFixture.balance);
         });

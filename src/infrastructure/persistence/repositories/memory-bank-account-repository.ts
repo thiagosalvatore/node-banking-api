@@ -7,6 +7,14 @@ import { BankAccountNotFound } from '@domain/errors/bank-account-not-found';
 export class MemoryBankAccountRepository implements BankAccountRepository {
     constructor(public bankAccounts: BankAccount[] = []) {}
 
+    private getNextBankAccountId(): number {
+        if (this.bankAccounts.length == 0) {
+            return 1;
+        }
+        const latestBankAccount = this.bankAccounts[this.bankAccounts.length - 1];
+        return latestBankAccount.id!! + 1;
+    }
+
     async getById(id: number): Promise<BankAccount> {
         return new Promise((resolve, reject) => {
             const bankAccount = this.bankAccounts.find((bankAccount) => bankAccount.id === id);
@@ -24,10 +32,11 @@ export class MemoryBankAccountRepository implements BankAccountRepository {
         );
     }
 
-    async save(bankAccount: BankAccount): Promise<void> {
+    async save(bankAccount: BankAccount): Promise<BankAccount> {
         // TODO: handle duplicated ids
+        bankAccount.id = this.getNextBankAccountId();
         this.bankAccounts.push(bankAccount);
-        return Promise.resolve();
+        return Promise.resolve(bankAccount);
     }
 
     async update(bankAccount: BankAccount): Promise<void> {

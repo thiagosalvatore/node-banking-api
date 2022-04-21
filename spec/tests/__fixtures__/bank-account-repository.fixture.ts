@@ -10,7 +10,8 @@ let bankAccountRepositoryMock: BankAccountRepository = {
         return bankAccountFixture;
     }),
     save: jest.fn(async (bankAccount: BankAccount) => {
-        return;
+        bankAccount.id = 1;
+        return bankAccount;
     }),
     update: jest.fn(async (bankAccount: BankAccount) => {
         return;

@@ -2,7 +2,7 @@ import { Customer } from '@domain/entities/customer';
 import { InsufficientFundsError } from '@domain/errors/insufficient-funds';
 
 export class BankAccount {
-    constructor(public id: number, public balance: number, public customer: Customer) {}
+    constructor(public balance: number, public customer: Customer, public id?: number) {}
 
     transferIn(amount: number) {
         this.balance += amount;
