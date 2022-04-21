@@ -39,8 +39,8 @@ router.post('/', checkSchema(transferSchema), async (req: Request, res: Response
         amount: req.body.amount,
     };
     try {
-        await transferAmount.execute(transferData);
-        return res.status(StatusCodes.CREATED).json({ message: 'success' });
+        const transfer = await transferAmount.execute(transferData);
+        return res.status(StatusCodes.CREATED).json(transfer);
     } catch (err) {
         if (err instanceof BankAccountNotFound) {
             return res.status(StatusCodes.NOT_FOUND).json({ message: err.message });

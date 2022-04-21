@@ -119,3 +119,46 @@ This resource allows you to fetch the latest balance from a bank account.
   "id": 1
 }
 ```
+
+#### Transfer amount between accounts
+This resource allows you to transfer a certain amount between two different accounts. Note that it checks if you have enough funds to do the transfer. 
+- Method: POST
+- URL: http://localhost:3000/api/transfers
+- Request Payload
+```json
+{
+  "fromBankAccountId": 3,
+  "toBankAccountId": 2,
+  "amount": 50
+}
+```
+
+- Success Response Payload (201 - CREATED)
+```json
+{
+  "fromBankAccountId": 3,
+  "toBankAccountId": 2,
+  "referenceDate": "2022-04-21T23:27:28.096Z",
+  "amount": 50,
+  "id": 1
+}
+```
+
+#### Retrieve transfer history for a given account
+This resource returns all the transfers that ever happened for a given account. It doesn't matter if the transfer came from this account or if the transfer was to this account, this resource returns both.
+
+- Method: GET
+- URL: http://localhost:3000/api/bank-accounts/{bank_account_id}/transfers
+
+- Success Response Payload (200 - OK)
+```json
+[
+  {
+    "fromBankAccountId": 3,
+    "toBankAccountId": 2,
+    "referenceDate": "2022-04-21T23:27:28.096Z",
+    "amount": 50,
+    "id": 1
+  }
+]
+```

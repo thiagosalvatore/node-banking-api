@@ -8,6 +8,7 @@ import { checkSchema, validationResult } from 'express-validator';
 import { newBankAccountSchema } from './schemas/bank-account-schema';
 import { CreateBankAccount } from '@application/use-cases/create-bank-account';
 import { ListTransferHistory } from '@application/queries/list-transfer-history';
+import { CustomerNotFound } from '@domain/errors/customer-not-found';
 
 const router = Router();
 
@@ -22,8 +23,14 @@ router.post('/', checkSchema(newBankAccountSchema), async (req: Request, res: Re
         customerId: req.body.customerId,
         depositAmount: req.body.depositAmount,
     };
-    const bankAccount = await createBankAccount.execute(bankAccountData);
-    return res.status(StatusCodes.CREATED).json(bankAccount);
+    try {
+        const bankAccount = await createBankAccount.execute(bankAccountData);
+        return res.status(StatusCodes.CREATED).json(bankAccount);
+    } catch (err) {
+        if (err instanceof CustomerNotFound) {
+            return res.status(StatusCodes.BAD_REQUEST).json({ message: err.message });
+        }
+    }
 });
 
 router.get('/:bankAccountId', async (req: Request, res: Response) => {

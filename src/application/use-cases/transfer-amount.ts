@@ -14,7 +14,7 @@ export class TransferAmount {
         @inject(TYPES.TransferRepository) private transferRepository: TransferRepository,
     ) {}
 
-    async execute(transferData: TransferDTO): Promise<void> {
+    async execute(transferData: TransferDTO): Promise<Transfer> {
         const fromBankAccount = await this.bankAccountRepository.getById(
             transferData.fromBankAccountId,
         );
@@ -34,5 +34,6 @@ export class TransferAmount {
         await this.bankAccountRepository.update(fromBankAccount);
         await this.bankAccountRepository.update(toBankAccount);
         await this.transferRepository.save(transfer);
+        return transfer;
     }
 }
