@@ -4,6 +4,7 @@ const TYPES = {
 
     RetrieveBankAccountBalance: Symbol.for('RetrieveBankAccountBalance'),
     CreateBankAccount: Symbol.for('CreateBankAccount'),
+    TransferAmount: Symbol.for('TransferAmount'),
 };
 
 export { TYPES };

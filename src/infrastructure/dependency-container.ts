@@ -6,6 +6,7 @@ import { MemoryBankAccountRepository } from '@repositories/memory-bank-account-r
 import { BankAccountRepository } from '@domain/repositories/bank-account-repository';
 import { RetrieveBankAccountBalance } from '@application/queries/retrieve-bank-account-balance';
 import { CreateBankAccount } from '@application/use-cases/create-bank-account';
+import { TransferAmount } from '../application/use-cases/transfer-amount';
 
 const container = new Container();
 container
@@ -20,4 +21,5 @@ container
     .bind<RetrieveBankAccountBalance>(TYPES.RetrieveBankAccountBalance)
     .to(RetrieveBankAccountBalance);
 container.bind<CreateBankAccount>(TYPES.CreateBankAccount).to(CreateBankAccount);
+container.bind<TransferAmount>(TYPES.TransferAmount).to(TransferAmount);
 export { container };
