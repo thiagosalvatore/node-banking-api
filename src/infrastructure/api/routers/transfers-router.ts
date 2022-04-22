@@ -8,23 +8,8 @@ import { TransferAmount } from '@application/use-cases/transfer-amount';
 import { TransferDTO } from '@application/dtos/transfer-dto';
 import { BankAccountNotFound } from '@domain/errors/bank-account-not-found';
 import { InsufficientFundsError } from '@domain/errors/insufficient-funds';
-import { ListTransferHistory } from '@application/queries/list-transfer-history';
 
 const router = Router();
-
-router.get('/:bankAccountId', async (req: Request, res: Response) => {
-    const { bankAccountId } = req.params;
-
-    if (!parseInt(bankAccountId)) {
-        return res
-            .status(StatusCodes.BAD_REQUEST)
-            .json({ message: 'Bank account id needs to be an integer' });
-    }
-
-    const listTransferHistory = container.get<ListTransferHistory>(TYPES.ListTransferHistory);
-    const transfers = listTransferHistory.execute(parseInt(bankAccountId));
-    return res.status(StatusCodes.OK).json(transfers);
-});
 
 router.post('/', checkSchema(transferSchema), async (req: Request, res: Response) => {
     const errors = validationResult(req);

@@ -6,7 +6,7 @@ describe('Application | Queries | ListTransferHistory', () => {
     it('calls transfer repository listByAccount with given id', async () => {
         const listTransferHistory = new ListTransferHistory(transferRepositoryMock);
 
-        await listTransferHistory.execute(transferFixture.id!!);
+        await listTransferHistory.execute(transferFixture.id!);
 
         expect(transferRepositoryMock.listByAccount).toHaveBeenCalledWith(transferFixture.id);
     });

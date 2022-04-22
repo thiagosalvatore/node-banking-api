@@ -3,7 +3,7 @@ import { CustomerRepository } from '@domain/repositories/customer-repository';
 import { Customer } from '@domain/entities/customer';
 import { CustomerNotFound } from '@domain/errors/customer-not-found';
 
-let customers: Customer[] = [
+const customers: Customer[] = [
     {
         id: 1,
         name: 'Arisha Barron',
@@ -31,7 +31,7 @@ export class MemoryCustomerRepository implements CustomerRepository {
             if (!customer) {
                 reject(new CustomerNotFound(`Customer with id ${id} not found`));
             }
-            resolve(customer!!);
+            resolve(customer!);
         });
     }
 }

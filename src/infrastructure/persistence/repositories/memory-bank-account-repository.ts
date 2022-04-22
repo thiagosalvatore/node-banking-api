@@ -12,7 +12,7 @@ export class MemoryBankAccountRepository implements BankAccountRepository {
             return 1;
         }
         const latestBankAccount = this.bankAccounts[this.bankAccounts.length - 1];
-        return latestBankAccount.id!! + 1;
+        return latestBankAccount.id! + 1;
     }
 
     async getById(id: number): Promise<BankAccount> {
@@ -22,7 +22,7 @@ export class MemoryBankAccountRepository implements BankAccountRepository {
             if (!bankAccount) {
                 reject(new BankAccountNotFound(`Bank account with id ${id} not found`));
             }
-            resolve(bankAccount!!);
+            resolve(bankAccount!);
         });
     }
 

@@ -11,7 +11,7 @@ export class MemoryTransferRepository implements TransferRepository {
             return 1;
         }
         const latestTransfer = this.transfers[this.transfers.length - 1];
-        return latestTransfer.id!! + 1;
+        return latestTransfer.id! + 1;
     }
 
     listByAccount(accountId: number): Promise<Transfer[]> {

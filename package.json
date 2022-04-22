@@ -58,8 +58,9 @@
     }
   },
   "eslintIgnore": [
-    "src/public/",
-    "build.ts"
+    "build.ts",
+    "*.test.ts",
+    "*.fixture.ts"
   ],
   "dependencies": {
     "command-line-args": "^5.2.1",

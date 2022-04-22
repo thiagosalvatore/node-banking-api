@@ -1,7 +1,4 @@
-import { RetrieveBankAccountBalance } from '@application/queries/retrieve-bank-account-balance';
 import { bankAccountRepositoryMock } from '../../../__fixtures__/bank-account-repository.fixture';
-import { bankAccountFixture } from '../../../__fixtures__/bank-account.fixture';
-import { BankAccountNotFound } from '@domain/errors/bank-account-not-found';
 import { CreateBankAccount } from '@application/use-cases/create-bank-account';
 import { customerRepositoryMock } from '../../../__fixtures__/customer-repository.fixture';
 import { BankAccountData } from '@application/dtos/bank-account-dto';

@@ -2,7 +2,7 @@ import { TransferRepository } from '@domain/repositories/transfer-repository';
 import { transferFixture } from './transfer.fixture';
 import { Transfer } from '@domain/entities/transfer';
 
-let transferRepositoryMock: TransferRepository = {
+const transferRepositoryMock: TransferRepository = {
     listByAccount: jest.fn(async (accountId: number) => {
         return [transferFixture];
     }),

@@ -11,7 +11,7 @@ describe('Infrastructure | Persistence | Repositories | MemoryBankAccountReposit
                 const repository = new MemoryBankAccountRepository([bankAccountFixture]);
                 const expectedBankAccount = bankAccountFixture;
 
-                const bankAccount = await repository.getById(bankAccountFixture.id!!);
+                const bankAccount = await repository.getById(bankAccountFixture.id!);
 
                 expect(bankAccount).toEqual(expectedBankAccount);
             });
@@ -101,7 +101,7 @@ describe('Infrastructure | Persistence | Repositories | MemoryBankAccountReposit
                 const updatedBankAccount = new BankAccount(
                     500,
                     bankAccountFixture.customer,
-                    bankAccountFixture.id!!,
+                    bankAccountFixture.id,
                 );
 
                 await repository.update(updatedBankAccount);
