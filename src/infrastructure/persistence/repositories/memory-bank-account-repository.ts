@@ -41,9 +41,7 @@ export class MemoryBankAccountRepository implements BankAccountRepository {
 
     async update(bankAccount: BankAccount): Promise<void> {
         return new Promise((resolve, reject) => {
-            const index = this.bankAccounts.findIndex(
-                (bankAccount) => bankAccount.id == bankAccount.id,
-            );
+            const index = this.bankAccounts.findIndex((it) => it.id == bankAccount.id);
             if (index === -1) {
                 reject(new BankAccountNotFound(`Bank account with id ${bankAccount.id} not found`));
             }
