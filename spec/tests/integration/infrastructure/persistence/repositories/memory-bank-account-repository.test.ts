@@ -51,7 +51,7 @@ describe('Infrastructure | Persistence | Repositories | MemoryBankAccountReposit
                 const repository = new MemoryBankAccountRepository([bankAccountFixture]);
                 const expectedBankAccounts: BankAccount[] = [];
 
-                const bankAccounts = await repository.listByCustomer(200);
+                const bankAccounts = await repository.listByCustomer('200');
 
                 expect(bankAccounts).toEqual(expectedBankAccounts);
             });

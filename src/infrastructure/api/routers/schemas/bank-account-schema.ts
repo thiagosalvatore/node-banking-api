@@ -3,7 +3,7 @@ import { Schema } from 'express-validator/src/middlewares/schema';
 export const newBankAccountSchema: Schema = {
     customerId: {
         errorMessage: 'Invalid customer id',
-        isNumeric: true,
+        isString: true,
         in: ['body'],
     },
     depositAmount: {

@@ -29,3 +29,20 @@ testDb.createUser({
         },
     ],
 });
+
+db.createCollection('customers');
+
+db.customers.insertMany([
+    {
+        name: 'Arisha Barron',
+    },
+    {
+        name: 'Branden Gibson',
+    },
+    {
+        name: 'Rhonda Church',
+    },
+    {
+        name: 'Georgina Hazel',
+    },
+]);

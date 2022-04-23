@@ -5,26 +5,26 @@ import { CustomerNotFound } from '@domain/errors/customer-not-found';
 
 const customers: Customer[] = [
     {
-        id: 1,
+        id: '1',
         name: 'Arisha Barron',
     },
     {
-        id: 2,
+        id: '2',
         name: 'Branden Gibson',
     },
     {
-        id: 3,
+        id: '3',
         name: 'Rhonda Church',
     },
     {
-        id: 4,
+        id: '4',
         name: 'Georgina Hazel',
     },
 ];
 
 @injectable()
 export class MemoryCustomerRepository implements CustomerRepository {
-    async getById(id: number): Promise<Customer> {
+    async getById(id: string): Promise<Customer> {
         return new Promise((resolve, reject) => {
             const customer = customers.find((customer) => customer.id === id);
 

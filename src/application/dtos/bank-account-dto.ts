@@ -1,4 +1,4 @@
 export interface BankAccountData {
-    customerId: number;
+    customerId: string;
     depositAmount?: number;
 }
