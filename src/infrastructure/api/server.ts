@@ -10,7 +10,10 @@ import { connectDb } from '../persistence/database';
 import logger from 'jet-logger';
 
 const app = express();
-connectDb().then(() => logger.info('Database connected'));
+
+if (process.env.NODE_ENV !== 'test') {
+    connectDb().then(() => logger.info('Database connected'));
+}
 /***********************************************************************************
  *                                  Middlewares
  **********************************************************************************/
