@@ -1,7 +1,15 @@
-### How to run
+### Deploying to production
+This project assumes that you are using Docker or any other docker-based tool like AWS ECS, Fargate or Kubernetes.
+In order to build
+- run `docker build -t paysail --target production .` from the root folder of the project
+- run `docker run -e MONGO_DB_HOST=host.docker.internal -e MONGO_DB_USERNAME=paysail -e MONGO_DB_PASSWORD=paysailpw -e MONGO_DB_DATABASE=paysail -p 3000:3000 paysail yarn start`
+- Please note that we are sending secrets in the command. In production we would never do that, we would inject those secrets as env vars using some vault like `AWS Parameter Store`
+
+### How to run (development)
 This project uses Node + Express + Typescript. Follow the steps below in order to use it:
-- run `yarn install` inside the project folder
-- run `yarn start:dev` to run the project with live reload enabled. It will be running on port 3000.
+- run `docker-compose up` in the root folder of the project
+- the project will be running with live reload enabled and it will be exposed on port 3000.
+- If you don't want to use docker, you can simply start the mongo container by running `docker-compose up mongo` and then run `yarn start:dev` from your local folder.
 
 
 ### Assumptions and missing items
