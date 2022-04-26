@@ -4,14 +4,16 @@ import { transferFixture } from '../../../__fixtures__/transfer.fixture';
 
 describe('Application | Queries | ListTransferHistory', () => {
     it('calls transfer repository listByAccount with given id', async () => {
-        const listTransferHistory = new ListTransferHistory(transferRepositoryMock);
+        const transferMock = transferRepositoryMock();
+        const listTransferHistory = new ListTransferHistory(transferMock);
 
         await listTransferHistory.execute(transferFixture.id!);
 
-        expect(transferRepositoryMock.listByAccount).toHaveBeenCalledWith(transferFixture.id);
+        expect(transferMock.listByAccount).toHaveBeenCalledWith(transferFixture.id);
     });
     it('returns the list of transfers for the given account', async () => {
-        const listTransferHistory = new ListTransferHistory(transferRepositoryMock);
+        const transferMock = transferRepositoryMock();
+        const listTransferHistory = new ListTransferHistory(transferMock);
         const expectedTransfers = [transferFixture];
 
         const transfers = await listTransferHistory.execute(transferFixture.fromBankAccountId);

@@ -24,7 +24,6 @@ module.exports = {
 
         // Cleans up database between each test
         afterEach(async () => {
-            console.log('removing');
             await removeAllCollections();
         });
 
