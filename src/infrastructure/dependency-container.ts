@@ -10,11 +10,12 @@ import { TransferAmount } from '@application/use-cases/transfer-amount';
 import { MemoryTransferRepository } from '@repositories/memory-transfer-repository';
 import { TransferRepository } from '@domain/repositories/transfer-repository';
 import { ListTransferHistory } from '@application/queries/list-transfer-history';
+import { MongoCustomerRepository } from '@repositories/mongo-customer-repository';
 
 const container = new Container();
 container
     .bind<CustomerRepository>(TYPES.CustomerRepository)
-    .to(MemoryCustomerRepository)
+    .to(MongoCustomerRepository)
     .inSingletonScope();
 container
     .bind<BankAccountRepository>(TYPES.BankAccountRepository)

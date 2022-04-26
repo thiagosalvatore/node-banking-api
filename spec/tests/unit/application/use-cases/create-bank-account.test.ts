@@ -8,7 +8,7 @@ import { BankAccount } from '@domain/entities/bank-account';
 
 describe('Application | UseCases | CreateBankAccount', () => {
     beforeEach(() => {
-        customerRepositoryMock.getById = jest.fn(async (id: number) => {
+        customerRepositoryMock.getById = jest.fn(async (id: string) => {
             return customerFixture;
         });
         bankAccountRepositoryMock.save = jest.fn(async (bankAccount: BankAccount) => {
@@ -36,7 +36,7 @@ describe('Application | UseCases | CreateBankAccount', () => {
                 .fn()
                 .mockRejectedValueOnce(new CustomerNotFound(`Customer with id 200 not found`));
             const bankAccountData: BankAccountData = {
-                customerId: 200,
+                customerId: '200',
                 depositAmount: 100,
             };
             const createBankAccount = new CreateBankAccount(

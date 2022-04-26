@@ -8,11 +8,11 @@ describe('Infrastructure | Persistence | Repositories | MemoryCustomerRepository
             it('should return the user', async () => {
                 const repository = new MemoryCustomerRepository();
                 const expectedCustomer: Customer = {
-                    id: 1,
+                    id: '1',
                     name: 'Arisha Barron',
                 };
 
-                const customer = await repository.getById(1);
+                const customer = await repository.getById('1');
 
                 expect(customer).toEqual(expectedCustomer);
             });
@@ -23,9 +23,9 @@ describe('Infrastructure | Persistence | Repositories | MemoryCustomerRepository
                 const repository = new MemoryCustomerRepository();
 
                 repository
-                    .getById(100)
+                    .getById('321')
                     .catch((e) =>
-                        expect(e).toEqual(new CustomerNotFound(`Customer with id 100 not found`)),
+                        expect(e).toEqual(new CustomerNotFound(`Customer with id 321 not found`)),
                     );
             });
         });

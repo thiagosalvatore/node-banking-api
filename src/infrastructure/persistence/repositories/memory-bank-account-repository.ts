@@ -26,7 +26,7 @@ export class MemoryBankAccountRepository implements BankAccountRepository {
         });
     }
 
-    async listByCustomer(customerId: number): Promise<BankAccount[]> {
+    async listByCustomer(customerId: string): Promise<BankAccount[]> {
         return Promise.resolve(
             this.bankAccounts.filter((bankAccount) => bankAccount.customer.id == customerId),
         );

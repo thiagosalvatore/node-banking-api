@@ -3,7 +3,7 @@ import { bankAccountFixture } from './bank-account.fixture';
 import { BankAccount } from '@domain/entities/bank-account';
 
 const bankAccountRepositoryMock: BankAccountRepository = {
-    listByCustomer: jest.fn(async (customerId: number) => {
+    listByCustomer: jest.fn(async (customerId: string) => {
         return [bankAccountFixture];
     }),
     getById: jest.fn(async (id: number) => {

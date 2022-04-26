@@ -10,16 +10,18 @@ describe('Application | UseCases | TransferAmount', () => {
     beforeEach(() => {
         jest.useFakeTimers().setSystemTime(new Date('2022-01-01'));
     });
+
+    afterEach(() => {
+        jest.resetAllMocks();
+    });
     it('calls bankAccountRepository getById once with fromBankAccount id', async () => {
+        const transferRepoMock = transferRepositoryMock();
         const transferData: TransferDTO = {
             fromBankAccountId: 1,
             toBankAccountId: 2,
             amount: 100,
         };
-        const transferAmount = new TransferAmount(
-            bankAccountRepositoryMock,
-            transferRepositoryMock,
-        );
+        const transferAmount = new TransferAmount(bankAccountRepositoryMock, transferRepoMock);
 
         await transferAmount.execute(transferData);
 
@@ -30,15 +32,19 @@ describe('Application | UseCases | TransferAmount', () => {
     });
 
     it('calls bankAccountRepository getById once with toBankAccountId', async () => {
+        const transferRepoMock = transferRepositoryMock();
         const transferData: TransferDTO = {
             fromBankAccountId: 1,
             toBankAccountId: 2,
             amount: 100,
         };
-        const transferAmount = new TransferAmount(
-            bankAccountRepositoryMock,
-            transferRepositoryMock,
-        );
+        const fromAccount = new BankAccount(200, customerFixture, 1);
+        const toAccount = new BankAccount(250, customerFixture, 2);
+        bankAccountRepositoryMock.getById = jest
+            .fn()
+            .mockReturnValueOnce(fromAccount)
+            .mockReturnValueOnce(toAccount);
+        const transferAmount = new TransferAmount(bankAccountRepositoryMock, transferRepoMock);
 
         await transferAmount.execute(transferData);
 
@@ -49,6 +55,7 @@ describe('Application | UseCases | TransferAmount', () => {
     });
 
     it('calls transfer repository save with correct transfer', async () => {
+        const transferRepoMock = transferRepositoryMock();
         const fromAccount = new BankAccount(200, customerFixture, 1);
         const toAccount = new BankAccount(250, customerFixture, 2);
         bankAccountRepositoryMock.getById = jest
@@ -60,10 +67,7 @@ describe('Application | UseCases | TransferAmount', () => {
             toBankAccountId: toAccount.id!,
             amount: 100,
         };
-        const transferAmount = new TransferAmount(
-            bankAccountRepositoryMock,
-            transferRepositoryMock,
-        );
+        const transferAmount = new TransferAmount(bankAccountRepositoryMock, transferRepoMock);
         const transfer: Transfer = {
             fromBankAccountId: fromAccount.id!,
             toBankAccountId: toAccount.id!,
@@ -74,6 +78,6 @@ describe('Application | UseCases | TransferAmount', () => {
 
         await transferAmount.execute(transferData);
 
-        expect(transferRepositoryMock.save).toHaveBeenCalledWith(transfer);
+        expect(transferRepoMock.save).toHaveBeenCalledWith(transfer);
     });
 });
