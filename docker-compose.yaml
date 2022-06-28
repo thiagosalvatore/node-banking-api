@@ -9,7 +9,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
-      MONGO_INITDB_DATABASE: paysail
+      MONGO_INITDB_DATABASE: banking
     ports:
       - "27017:27017"
 

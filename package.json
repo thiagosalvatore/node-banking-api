@@ -1,8 +1,8 @@
 {
-  "name": "paysail-banking-api-xrfewb",
+  "name": "nodejs-banking-api",
   "version": "1.0.0",
-  "description": "Paysail take home assignment",
-  "repository": "http://paysail-uyjdzw@git.codesubmit.io/paysail/paysail-banking-api-xrfewb",
+  "description": "Banking API written in NodeJS",
+  "repository": "https://github.com/thiagosalvatore/node-banking-api",
   "author": "Thiago  Salvatore <thiago.salvatore@gmail.com>",
   "license": "MIT",
   "scripts": {

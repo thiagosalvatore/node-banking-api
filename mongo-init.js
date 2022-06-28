@@ -1,31 +1,31 @@
 db.createUser({
-    user: 'paysail',
-    pwd: 'paysailpw',
+    user: 'username',
+    pwd: 'password',
     roles: [
         {
             role: 'readWrite',
-            db: 'paysail',
+            db: 'banking',
         },
         {
             role: 'readWrite',
-            db: 'paysail-test',
+            db: 'banking-test',
         },
     ],
 });
 
-testDb = db.getSiblingDB('paysail-test');
+testDb = db.getSiblingDB('banking-test');
 
 testDb.createUser({
-    user: 'paysail',
-    pwd: 'paysailpw',
+    user: 'username',
+    pwd: 'password',
     roles: [
         {
             role: 'readWrite',
-            db: 'paysail',
+            db: 'banking',
         },
         {
             role: 'readWrite',
-            db: 'paysail-test',
+            db: 'banking-test',
         },
     ],
 });
